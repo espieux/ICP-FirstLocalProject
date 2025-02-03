@@ -2,6 +2,7 @@ import Nat8 "mo:base/Nat8";
 import Debug "mo:base/Debug";
 import Blob "mo:base/Blob";
 import Nat "mo:base/Nat";
+import Timer "mo:base/Timer";
 // The management canister's principal ID is "aaaaa-aa".
 import IC "ic:aaaaa-aa";
 
@@ -28,7 +29,10 @@ actor {
       currentRandomNumber
   };
 
-  public func init() : async () {
-    await generateNewNumber();
-  }
+  // public func init() : async () {
+  //   await generateNewNumber();
+  // }
+
+  // Initialize timer to generate a new number every 5 seconds
+  let timer = Timer.recurringTimer(#seconds 5, generateNewNumber);
 }
